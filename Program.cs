@@ -10,6 +10,7 @@ class Program
         for (int i = 0; i < n; i++ )
         {
             suma = suma + notas[i];
+
             if (notas[i] > mayor)
             {
                mayor = notas[i];
@@ -25,7 +26,6 @@ class Program
     static int ContarAprobados(int[] notas, int n)
     {
         int aprobados = 0;
-
         for (int i = 0; i < n; i++ )
         {
             if (notas[i] >= 12)
@@ -54,6 +54,7 @@ class Program
             }
             notas[i] = nota;
         }
+
         double promedio = 0;
         int mayor = 0;
         int menor = 0;
@@ -62,15 +63,14 @@ class Program
 
         int aprobados = ContarAprobados(notas, n);
         int desaprobados = n - aprobados;
-
+        double porcentajeAprobados = (double)aprobados * 100 / n;
+        double porcentajeDesaprobados = (double)desaprobados * 100 / n;
         Console.WriteLine();
         Console.WriteLine("REPORTE DEL SALON");
-
         Console.Write("Notas ingresadas: [");
         for (int i = 0; i < n; i++ )
         {
             Console.Write(notas[i]);
-
             if (i < n - 1)
             {
             Console.Write(", ");
@@ -81,7 +81,12 @@ class Program
         Console.WriteLine("Nota maxima: " + mayor);
         Console.WriteLine("Nota minima: " + menor);
         Console.WriteLine();
-        Console.WriteLine("Aprobados: " + aprobados);
-        Console.WriteLine("Desaprobados: " + desaprobados);
+        Console.WriteLine("Aprobados: " + aprobados + " (" + porcentajeAprobados.ToString("F2") + "%)");
+        Console.WriteLine("Desaprobados: " + desaprobados + " (" + porcentajeDesaprobados.ToString("F2") + "%)");
+        if (porcentajeDesaprobados > 75)
+        {
+            Console.WriteLine();
+            Console.WriteLine("ALERTA¡¡¡!!!: Se ha desaprobado mas del 75% del salon!!!");
+        }
     }
 }
